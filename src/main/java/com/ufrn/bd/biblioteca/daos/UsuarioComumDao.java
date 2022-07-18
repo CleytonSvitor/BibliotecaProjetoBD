@@ -35,6 +35,56 @@ public class UsuarioComumDao extends AbstractDao{
 		}
 	}
 	
+	public static boolean bloquearUsuario(UsuarioComum usuarioComum) {
+		try {
+			
+			StringBuffer sql = new StringBuffer();
+			sql.append("UPDATE usuario_comum ");
+			sql.append("SET bloqueado = ? ");
+			sql.append("WHERE usuario_pessoa_id = ? ");
+			
+			PreparedStatement statement = ConexaoBanco.conexaoComBancoMySQL().prepareStatement(sql.toString());
+			statement.setBoolean(1, true);
+			statement.setInt(2, usuarioComum.getUsuario().getPessoa().getId());
+			
+			int linhasAlteradas = statement.executeUpdate();
+			if (linhasAlteradas > 0) {
+				
+				return true;
+			}
+			
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public static boolean desbloquear(UsuarioComum usuarioComum) {
+		try {
+			
+			StringBuffer sql = new StringBuffer();
+			sql.append("UPDATE usuario_comum ");
+			sql.append("SET bloqueado = ? ");
+			sql.append("WHERE usuario_pessoa_id = ? ");
+			
+			PreparedStatement statement = ConexaoBanco.conexaoComBancoMySQL().prepareStatement(sql.toString());
+			statement.setBoolean(1, false);
+			statement.setInt(2, usuarioComum.getUsuario().getPessoa().getId());
+			
+			int linhasAlteradas = statement.executeUpdate();
+			if (linhasAlteradas > 0) {
+				
+				return true;
+			}
+			
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	public static UsuarioComum buscarUsuarioComumPorIdPessoa(int idPessoa) {
 		try {
 			

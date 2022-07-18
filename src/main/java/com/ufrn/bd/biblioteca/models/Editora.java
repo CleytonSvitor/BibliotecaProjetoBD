@@ -1,14 +1,14 @@
 package com.ufrn.bd.biblioteca.models;
 
 public class Editora {
-	private int Editora;
+	private int id;
 	private String nome;
 	
-	public int getEditora() {
-		return Editora;
+	public int getId() {
+		return id;
 	}
-	public void setEditora(int editora) {
-		Editora = editora;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getNome() {
 		return nome;
